@@ -6,7 +6,7 @@ const connectionString = process.env.DB_URL;
 //  console.error('Connection error', e.message);
 //});
 
-mongoose.connect('mongodb://db/moviedb', { useNewUrlParser: true }).catch((e) => {
+mongoose.connect('mongodb://data/db', { useNewUrlParser: true }).catch((e) => {
   console.error('Connection error', e.message);
 });
 
