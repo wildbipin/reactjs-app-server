@@ -17,6 +17,6 @@ mongoose.connect(connectionString, {
 //  console.error('Connection error', e.message);
 //});
 
-const db = mongoose.connection;
+const db = mongoose;
 
 module.exports = db;
