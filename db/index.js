@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 //const connectionString = mongodb://<username>:<password>@<pod-0-name>.<headless-service-name>.<namespace>.svc.cluster.local:27017,<pod-1-name>.<headless-service-name>.<namespace>.svc.cluster.local:27017/<database-name>?replicaSet=rs0;
 
 
-const connectionString = 'mongodb://adminuser:password123@mongodb-0.mongodb-service.default.svc.cluster.local:27017,mongodb-1.mongodb-service.default.svc.cluster.local:27017/moviedb?replicaSet=mongo-rs';
+const connectionString = 'mongodb://adminuser:password123@mongodb-0.mongodb-service.default.svc.cluster.local:27017,mongodb-1.mongodb-service.default.svc.cluster.local:27017/moviedb?authSource=admin';
 
 mongoose.connect(connectionString, { 
   useNewUrlParser: true,
@@ -17,6 +17,6 @@ mongoose.connect(connectionString, {
 //  console.error('Connection error', e.message);
 //});
 
-const db = mongoose;
+const db = mongoose.connection;
 
 module.exports = db;
