@@ -1,0 +1,42 @@
+name: Trigger auto deployment for static-webserver
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ master ]
+    paths:
+    - '**'
+    - '.github/workflows/static-webserver-AutoDeployTrigger-c3b45b1a-252f-4451-bf0f-4535dd564024.yml'
+
+  # Allow mannually trigger 
+  workflow_dispatch:
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.STATICWEBSERVER_AZURE_CREDENTIALS }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: registry.hub.docker.com
+          registryUsername: ${{ secrets.STATICWEBSERVER_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.STATICWEBSERVER_REGISTRY_PASSWORD }}
+          containerAppName: static-webserver
+          resourceGroup: rg-staticweb
+          imageToBuild: registry.hub.docker.com/static-webserver:${{ github.sha }}
+          dockerfilePath: Dockerfile
+
+     
+
