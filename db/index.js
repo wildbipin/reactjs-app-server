@@ -1,21 +1,12 @@
 const mongoose = require('mongoose');
 
-//const connectionString = process.env.DB_URL;
+const mongoUri = 'mongodb://reactjsstaticwebapp-server:cXNOMD6RkXMaPeSX4nXt7JR6aZVUqObw1gfBo8UOsOGMXfkY0glhelfqxxWkd8jJZ1sGlEjbZYAMACDbO5HUkQ==@reactjsstaticwebapp-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@reactjsstaticwebapp-server@';
 
-//const connectionString = mongodb://<username>:<password>@<pod-0-name>.<headless-service-name>.<namespace>.svc.cluster.local:27017,<pod-1-name>.<headless-service-name>.<namespace>.svc.cluster.local:27017/<database-name>?replicaSet=rs0;
-
-
-const connectionString = 'mongodb://adminuser:password123@mongodb-0.mongodb-service.default.svc.cluster.local:27017,mongodb-1.mongodb-service.default.svc.cluster.local:27017/moviedb?authSource=admin';
-
-mongoose.connect(connectionString, { 
+mongoose.connect(mongoUri, { 
   useNewUrlParser: true,
   useUnifiedTopology: true,}).catch((e) => {
   console.error('Connection error', e.message);
 });
-
-//mongoose.connect('mongodb://data/db', { useNewUrlParser: true }).catch((e) => {
-//  console.error('Connection error', e.message);
-//});
 
 const db = mongoose.connection;
 
