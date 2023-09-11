@@ -8,8 +8,7 @@ const mongoUri = 'mongodb://reactjsstaticwebapp-server:cXNOMD6RkXMaPeSX4nXt7JR6a
 
 mongoose.connect(mongoUri, 
   { 
-  useNewUrlParser: true,
-  useUnifiedTopology: true 
+  useNewUrlParser: true
   }).catch((e) => {
   console.error('Connection error', e.message);
 });
